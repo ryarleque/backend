@@ -14,4 +14,5 @@ public class PromoRequest {
     private String description;
     private double value;
     private String unit;
+    private int months;
 }

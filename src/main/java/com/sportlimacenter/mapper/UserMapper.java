@@ -2,6 +2,7 @@ package com.sportlimacenter.mapper;
 
 import com.sportlimacenter.entity.User;
 import com.sportlimacenter.model.request.RegisterUserRequest;
+import com.sportlimacenter.model.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

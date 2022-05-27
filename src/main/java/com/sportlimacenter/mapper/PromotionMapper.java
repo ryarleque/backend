@@ -14,7 +14,7 @@ public interface PromotionMapper {
             @Mapping(target = "description", source = "promo.description"),
             @Mapping(target = "value", source = "promo.value"),
             @Mapping(target = "unit", source = "promo.unit"),
-            @Mapping(target = "user", ignore = true)
+            @Mapping(target = "months_subscription", source = "promo.months")
     })
     Promotion mapFromRegisterUserRequest(RegisterUserRequest request);
 }
