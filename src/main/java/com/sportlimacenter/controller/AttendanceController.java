@@ -19,6 +19,6 @@ public class AttendanceController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public CreateAttendanceResponse createBulkAttendance(@RequestBody CreateAttendanceRequest request) {
-        return attendanceService.createBulkAttendance(request.getUserIds());
+        return attendanceService.createBulkAttendance(request.getAttendances());
     }
 }

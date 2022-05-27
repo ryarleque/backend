@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class CreateAttendanceRequest {
 
-    private List<Long> userIds;
+    private List<UserAttendanceRequest> attendances;
 
 }

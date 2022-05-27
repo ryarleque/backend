@@ -9,5 +9,6 @@ import java.util.List;
 @Builder
 public class CreateAttendanceResponse {
 
-    private List<UserAttendanceResponse> attendance;
+    private List<UserAttendanceResponse> attendanceList;
+    private List<UserPerformanceInfoResponse> performanceList;
 }
