@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "5622a4b4-929b-429d-b194-18c902ebd347",
+		"name": "SportLimaCenter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Local",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"try {",
+							"    const response = pm.response.json();",
+							"",
+							"    pm.test(\"Response includes token\", function () {",
+							"        pm.expect(response).to.include.keys(\"token\");",
+							"    });",
+							"",
+							"    pm.environment.set(\"token\", response.token);",
+							"}",
+							"catch(e){",
+							"    pm.test(\"Failed to run tests\", (() => {throw new Error(e.message)}))",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic NDYxNzIyOTk6V2VsY29tZTEyMzQ1Njc4OTEwIQ=="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": \"46172266\",\n\t\"password\": \"Welcome12345678910!\"\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}:8080/v1/sportapi/users/login",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register AWS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4=",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": \"46172268\",\n\t\"password\": \"Welcome12345678910!\",\n\t\"name\": \"Martin\",\n\t\"lastName\": \"Galvez\",\n\t\"profile\": \"alumno\",\n\t\"phone\": \"999999a\",\n\t\"email\": \"sad@edu.pe\",\n\t\"branchId\": 1,\n\t\"promo\": {\n\t\t\"description\": \"Descuento por nuevo alumno\",\n\t\t\"value\":\"80\",\n\t\t\"unit\":\"S/.\",\n\t\t\"months\": 2\n\t},\n\t\"referralCode\": \"46172266\"\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}:8080/v1/sportapi/users/register",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attendance POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjE3MjI2NiIsInJvbGVzIjpbIlJPTEVfYWx1bW5vIl0sImV4cCI6MTY1MzcxMjk5NCwiaWF0IjoxNjUzNjk0OTk0fQ.h4QXzoTWI7VumILuKiSPEOOgFm7SOkSuK4BxfTU5ZK31GnkEoPvVoklJ5-y1ejCjNNyrEHrgkDDsoUXYHFJEbg",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"attendances\" : [\n\t\t{\n\t\t\t\"userId\": ,\n\t\t\t\"km\": 100.5,\n\t\t\t\"calories\": 45.6\n\t\t}\n\t]\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}:8080/v1/sportapi/attendance",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"attendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET user by DNI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjE3MjI2NiIsInJvbGVzIjpbIlJPTEVfYWx1bW5vIl0sImV4cCI6MTY1MzY1NDk4MSwiaWF0IjoxNjUzNjM2OTgxfQ.K_0aGYFH7L7cjE5Ujh7pLjc_VSJTrK4u9YXVxyMd5iAF-NmC5iTciHg0Fle8doo_pO3lfDvN1dm7zabl55dPkw"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/sportapi/users/dni/46172266",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"users",
+						"dni",
+						"46172266"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET users by branch id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjE3MjI2NiIsInJvbGVzIjpbIlJPTEVfYWx1bW5vIl0sImV4cCI6MTY1MzY1NDk4MSwiaWF0IjoxNjUzNjM2OTgxfQ.K_0aGYFH7L7cjE5Ujh7pLjc_VSJTrK4u9YXVxyMd5iAF-NmC5iTciHg0Fle8doo_pO3lfDvN1dm7zabl55dPkw"
+					}
+				],
+				"url": {
+					"raw": "http://{{url}}:8080/v1/sportapi/users/branch/1",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"users",
+						"branch",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET performance info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjE3MjI2NiIsInJvbGVzIjpbIlJPTEVfYWx1bW5vIl0sImV4cCI6MTY1MzcxMjk5NCwiaWF0IjoxNjUzNjk0OTk0fQ.h4QXzoTWI7VumILuKiSPEOOgFm7SOkSuK4BxfTU5ZK31GnkEoPvVoklJ5-y1ejCjNNyrEHrgkDDsoUXYHFJEbg"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/sportapi/performance/info?dni=46172266",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"sportapi",
+						"performance",
+						"info"
+					],
+					"query": [
+						{
+							"key": "dni",
+							"value": "46172266"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
