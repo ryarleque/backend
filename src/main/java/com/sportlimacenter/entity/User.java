@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
@@ -37,7 +38,9 @@ public class User {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String email;
-    private long branchId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
     private boolean isReferred;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "promotion_id", nullable = false)
